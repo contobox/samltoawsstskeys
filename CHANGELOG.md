@@ -1,5 +1,7 @@
 # Changelog
-
+## 2022-nov-01 (v2.9)  
+* Set default Session Duration to 4h.  
+* Added a field to set custom Session Duration.
 ## 2022-jun-29 (v2.8)
 * At request of Google, the "tabs" permission is removed.
 

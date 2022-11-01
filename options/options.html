@@ -13,8 +13,8 @@
 	<hr>
 	
 	<div id="divInfo">
-		<p>Developed by prolane.org (Gerard Laan)</p>
-		<p>For help, please see README at the <a href="https://github.com/prolane/samltoawsstskeys/blob/master/README.md" target="_blank">project page on Github.com</a></p>
+		<p>Developed by prolane.org (Gerard Laan), forked by Contobox</p>
+		<p>For help, please see README at the <a href="https://github.com/contobox/samltoawsstskeys/blob/master/README.md" target="_blank">forked project page on Github.com</a></p>
 	</div>
 	
 	<div id="divSettings">
@@ -39,6 +39,11 @@
 				<option value="yes">yes</option>
 				<option value="no">no</option>
 			</select>
+		</div>
+		<div id="divFilename" class="setting-part">
+			<label>Set Session Duration in seconds. Example: 14400 is 4 hours<br>Note: the requested DurationSeconds can NOT be more than MaxSessionDuration set for this role</label>
+			<br />
+			<input type="text" name="SessionDurationSeconds" id="SessionDurationSeconds" size="40">
 		</div>
 		
 		<div id="divRoles" class="setting-part">

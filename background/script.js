@@ -1,7 +1,8 @@
 // Global variables
 var FileName = 'credentials';
-var ApplySessionDuration = true;
-var DebugLogs = false;
+var ApplySessionDuration = false;
+var SessionDuration = 14400;
+var DebugLogs = true;
 var RoleArns = {};
 var LF = '\n';
 
@@ -88,7 +89,7 @@ function onBeforeRequestEvent(details) {
   var PrincipalArn = '';
   var RoleArn = '';
   var SAMLAssertion = undefined;
-  var SessionDuration = domDoc.querySelectorAll('[Name="https://aws.amazon.com/SAML/Attributes/SessionDuration"]')[0]
+  var SessionDurationFromSAML = domDoc.querySelectorAll('[Name="https://aws.amazon.com/SAML/Attributes/SessionDuration"]')[0]
   var hasRoleIndex = false;
   var roleIndex = undefined;
   if (details.requestBody.formData) {
@@ -103,13 +104,12 @@ function onBeforeRequestEvent(details) {
     hasRoleIndex = roleIndex != undefined;
   }
 
-  // Only set the SessionDuration if it was supplied by the SAML provider and 
+  // Set the SessionDuration if it was supplied by the SAML provider and 
   // when the user has configured to use this feature.
-  if (SessionDuration !== undefined && ApplySessionDuration) {
-    SessionDuration = Number(SessionDuration.firstElementChild.textContent)
-  } else {
-    SessionDuration = null;
-  }
+  if (SessionDurationFromSAML !== undefined && ApplySessionDuration) {
+    SessionDuration = Number(SessionDurationFromSAML.firstElementChild.textContent)
+  } 
+  if (DebugLogs) console.log('DEBUG: SessionDuration: ' + SessionDuration); 
 
   // Change newline sequence when client is on Windows
   if (navigator.userAgent.indexOf('Windows')  !== -1) {
@@ -175,7 +175,10 @@ function extractPrincipalPlusRoleAndAssumeRole(samlattribute, SAMLAssertion, Ses
 	// Call STS API from AWS
 	var sts = new AWS.STS();
 	sts.assumeRoleWithSAML(params, function(err, data) {
-		if (err) console.log(err, err.stack); // an error occurred
+		if (err) {
+      console.log(err, err.stack); // an error occurred
+      alert(err.message);
+    }
 		else {
 			// On succesful API response create file with the STS keys
 			var docContent = "[default]" + LF +
@@ -298,13 +301,16 @@ chrome.runtime.onMessage.addListener(
 
 
 function loadItemsFromStorage() {
+  //default values for the options
   chrome.storage.sync.get({
     FileName: 'credentials',
-    ApplySessionDuration: 'yes',
-    DebugLogs: 'no',
+    ApplySessionDuration: 'no',
+    SessionDuration: '14400',
+    DebugLogs: 'yes',
     RoleArns: {}
   }, function(items) {
     FileName = items.FileName;
+    SessionDuration = items.SessionDuration;
     if (items.ApplySessionDuration == "no") {
       ApplySessionDuration = false;
     } else {
