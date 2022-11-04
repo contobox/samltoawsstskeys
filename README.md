@@ -10,6 +10,7 @@ The Chrome Extension can be downloaded here:
 * [Why this Chrome Extension?](#why)
 * [Getting Started](#gettingstarted)
 * [Frequently Asked Question](#faq)
+* [Link to the default configs on Mac](#macln)
 * [Todo](#todo)
 
 ## <a name="why"></a>Why this Chrome Extension?
@@ -26,6 +27,12 @@ The Security Token Service (STS) from AWS provides an API action assumeRoleWithS
 4. Click on "Load unpacked extension..."
 5. Select the folder where you cloned this repository
 6. Enjoy!
+
+## <a name="macln"></a>Link to the default configs on Mac 
+```
+rm ~/.aws/credentials
+ln -s ~/Downloads/credentials ~/.aws/credentials
+```
 
 ## <a name="faq"></a>FAQ: Frequently Asked Question
 1. How long are the credentials valid?  
