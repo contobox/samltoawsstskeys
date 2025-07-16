@@ -1,7 +1,20 @@
 # Changelog
-## 2022-nov-01 (v2.9)  
-* Set default Session Duration to 4h.  
-* Added a field to set custom Session Duration.
+
+## 2023-mar-20 (v3.3)
+* Option to set custom Session Duration
+
+## 2022-dec-19 (v3.2)
+* Fix [#61](https://github.com/prolane/samltoawsstskeys/issues/61). Instead of using the aws http api directly for AssumeRoleWithSAML, this version switches to using the aws sdk. This is to fix processing large SAML Assertions.
+* Fix [#62](https://github.com/prolane/samltoawsstskeys/issues/62). When the IDP does not add a Session Duration as SAML Assertion Attribute, ignore and continue.
+
+## 2022-dec-16 (v3.1)
+* Fix [#58](https://github.com/prolane/samltoawsstskeys/issues/58). Parse various SAML Assertion AttributeValue syntax in a consistent way.
+
+## 2022-dec-15 (v3.0)
+* Code refactoring due to upgrading to Extension Manifest V3
+* Improved popup styling
+* LCM on dependency libs
+
 ## 2022-jun-29 (v2.8)
 * At request of Google, the "tabs" permission is removed.
 
@@ -32,11 +45,11 @@
 * Updated 'AWS SDK for Javascript' library to latest version
 * Plugin now shows changelog to the user after the installation of new version
 * Options panel has a new look to improve readability
-		
+
 ## 2016-jul-24 (v1.2)
 * Bug fix: when just 1 role in the SAML Assertion available now also works well
 * Now uses a regex to extract Role and Principal from SAML Assertion. This way it does not matter in what order the IDP adds the Role and Principle to the SAML Assertion.
-		
+
 ## 2016-apr-11 (v1.1)
 * Improved usability. No longer needed to manually specify PrincipalArn and RoleArn in options panel. Removed these options from the options panel. PrincipalArn and RoleArn is now parsed from the SAML Assertion itself.
 
