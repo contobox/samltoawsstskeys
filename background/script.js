@@ -1,7 +1,7 @@
 // Global variables
 var FileName = 'credentials';
 var ApplySessionDuration = false;
-var SessionDuration = 14400;
+var SessionDuration = 43200;
 var DebugLogs = true;
 var RoleArns = {};
 var LF = '\n';
@@ -248,7 +248,7 @@ function assumeAdditionalRole(profileList, index, AccessKeyId, SecretAccessKey, 
 		// Otherwise, this is the last profile/role in the RoleArns dict. Proceed to creating the credentials file
 		if (index < profileList.length - 1) {
 			console.log('INFO: Do additional assume-role for role -> ' + RoleArns[profileList[index + 1]]);
-			assumeAdditionalRole(profileList, index + 1, AccessKeyId, SecretAccessKey, SessionToken, docContent);
+			assumeAdditionalRole(profileList, index + 1, AccessKeyId, SecretAccessKey, SessionToken, docContent, SessionDuration);
 		} else {
 			outputDocAsDownload(docContent);
 		}
@@ -305,12 +305,12 @@ function loadItemsFromStorage() {
   chrome.storage.sync.get({
     FileName: 'credentials',
     ApplySessionDuration: 'no',
-    SessionDuration: '14400',
+    SessionDuration: '43200',
     DebugLogs: 'yes',
     RoleArns: {}
   }, function(items) {
     FileName = items.FileName;
-    SessionDuration = items.SessionDuration;
+    SessionDuration = Number(items.SessionDuration);
     if (items.ApplySessionDuration == "no") {
       ApplySessionDuration = false;
     } else {
