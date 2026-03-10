@@ -1,5 +1,7 @@
 # SAML to AWS STS Keys Conversion
-Google Chrome Extension, which converts a SAML 2.0 assertion to AWS STS Keys (temporary credentials). Just log in to the AWS Web Management Console using your SAML IDP and the Chrome Extension will fetch the SAML Assertion from the HTTP request. The SAML Assertion is then used to call the assumeRoleWithSAML API to create the temporary credentials. (AccessKeyId, SecretAccessKey and SessionToken).
+Browser Extension, which converts a SAML 2.0 assertion to AWS STS Keys (temporary credentials). Just log in to the AWS Web Management Console using your SAML IDP and the extension will fetch the SAML Assertion from the HTTP request. The SAML Assertion is then used to call the assumeRoleWithSAML API to create the temporary credentials. (AccessKeyId, SecretAccessKey and SessionToken).
+
+> **Note:** This extension currently uses Manifest V2 and is not supported in Chrome 127+. Use a Chromium-based browser that still supports MV2 (e.g., Brave, Edge) or Mozilla Firefox. Alternatively, in Chrome you can re-enable MV2 support via `chrome://flags` by setting "Extensions Manifest V2 Deprecation" to Enabled.
 
 The Chrome Extension can be downloaded here:
 [Google Chrome Web Store](https://chrome.google.com/webstore/detail/ekniobabpcnfjgfbphhcolcinmnbehde/)
@@ -22,7 +24,7 @@ The Security Token Service (STS) from AWS provides an API action assumeRoleWithS
 
 ## <a name="gettingstarted"></a>Getting Started from local
 1. Clone this repository
-2. Open Chrome and go to `chrome://extensions/`
+2. Open a Chromium-based browser that supports Manifest V2 (e.g., Brave, Edge) and go to the extensions page (e.g., `brave://extensions/` or `edge://extensions/`)
 3. Enable Developer Mode
 4. Click on "Load unpacked extension..."
 5. Select the folder where you cloned this repository
@@ -36,7 +38,7 @@ ln -s ~/Downloads/credentials ~/.aws/credentials
 
 ## <a name="faq"></a>FAQ: Frequently Asked Question
 1. How long are the credentials valid?  
-By default, the credentials are valid for 4 hours. This can be changed in the AWS IAM console or Extension settings.
+By default, the credentials are valid for 12 hours. This can be changed in the AWS IAM console or Extension settings. Note: the requested duration cannot exceed the MaxSessionDuration set on the IAM role.
 
 ## <a name="todo"></a>TODO
 1. Migrate from [Manifest v2 to v3](https://blog.chromium.org/2020/12/manifest-v3-now-available-on-m88-beta.html)
