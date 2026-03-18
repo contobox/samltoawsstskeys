@@ -23,7 +23,7 @@ The Security Token Service (STS) from AWS provides an API action assumeRoleWithS
 
 ## <a name="gettingstarted"></a>Getting Started from source
 1. Clone this repository
-2. Open Chrome and go to `chrome://extensions/`
+2. Open Chrome and go to `chrome://extensions/`. Or, open a Chromium-based browser that supports Manifest V2 (e.g., Brave, Edge) and go to the extensions page (e.g., `brave://extensions/` or `edge://extensions/`)
 3. Enable Developer Mode
 4. Click on "Load unpacked extension..."
 5. Select the folder where you cloned this repository
@@ -59,7 +59,7 @@ npm run build
 With security in mind Google has limited the Chrome browser to only read and write to the Chrome Downloads directory. This way none of your Chrome extension will be able to steal data from your computer.
 
 3. How long are the credentials valid?
-AWS calls this 'session duration'. The default session duration is 4 hours. The maximum session duration is configured in AWS IAM as an attribute of the IAM Role. Your IDP might be configured to pass along an additional SAML claim which requests to apply a custom session duration. This value can be configured to be higher than the default of 4 hours. However, this can never be higher than the configured maximum session duration on the IAM Role as this will result in an error.
+AWS calls this 'session duration'. The default session duration is 12 hours. The maximum session duration is configured in AWS IAM as an attribute of the IAM Role. Your IDP might be configured to pass along an additional SAML claim which requests to apply a custom session duration. This value can be configured to be higher than the default of 4 hours. However, this can never be higher than the configured maximum session duration on the IAM Role as this will result in an error.
 
 4. <a name="symlink"></a>Create a symlink to your .aws directory on Mac
 ```
