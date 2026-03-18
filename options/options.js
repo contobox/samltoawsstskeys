@@ -53,7 +53,7 @@ function restore_options() {
     // Default values
     FileName: 'credentials',
     ApplySessionDuration: 'yes',
-    CustomSessionDuration: '3600',
+    CustomSessionDuration: '43200',
     DebugLogs: 'no',
     RoleArns: {}
   }, function (items) {

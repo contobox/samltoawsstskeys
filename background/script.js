@@ -6,7 +6,7 @@ importScripts(
 // Global variables
 let FileName = 'credentials';
 let ApplySessionDuration = true;
-let CustomSessionDuration = 14400;
+let CustomSessionDuration = 43200;
 let DebugLogs = false;
 let RoleArns = {};
 let LF = '\n';
@@ -416,12 +416,12 @@ function loadItemsFromStorage() {
   chrome.storage.sync.get({
     FileName: 'credentials',
     ApplySessionDuration: 'yes',
-    CustomSessionDuration: '14400',
+    CustomSessionDuration: '43200',
     DebugLogs: 'no',
     RoleArns: {}
   }, function (items) {
     FileName = items.FileName;
-    CustomSessionDuration = items.CustomSessionDuration;
+    CustomSessionDuration = Number(items.CustomSessionDuration);
     if (items.ApplySessionDuration == "no") {
       ApplySessionDuration = false;
     } else {
